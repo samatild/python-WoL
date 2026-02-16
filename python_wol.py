@@ -7,8 +7,8 @@ import argparse
 import logging
 import sys
 import time
-
 from pathlib import Path
+from typing import List, Tuple
 
 try:
     from ping3 import ping
@@ -32,7 +32,7 @@ def setup_logging(log_path: Path) -> None:
     """Configure logging to file and stdout."""
     fmt = "%(asctime)s [%(levelname)s] %(message)s"
     datefmt = "%Y-%m-%d %H:%M:%S"
-    handlers: list[logging.Handler] = [logging.StreamHandler(sys.stdout)]
+    handlers: List[logging.Handler] = [logging.StreamHandler(sys.stdout)]
     try:
         handlers.insert(0, logging.FileHandler(log_path))
     except OSError:
@@ -54,7 +54,7 @@ def ensure_config_exists() -> Path:
         sys.exit(1)
 
 
-def load_hosts(config_path: Path) -> list[tuple[str, str]]:
+def load_hosts(config_path: Path) -> List[Tuple[str, str]]:
     """Parse config file. Returns list of (ip, mac) tuples."""
     hosts = []
     for line in config_path.read_text().splitlines():
