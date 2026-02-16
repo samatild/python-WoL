@@ -1,0 +1,2 @@
+ping3>=4.0.4
+wakeonlan>=2.1.0
