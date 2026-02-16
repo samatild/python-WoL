@@ -1,0 +1,18 @@
+[Unit]
+Description=python-WoL - Monitor hosts and send Wake-on-LAN when down
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /opt/python-WoL/python_wol.py
+Restart=on-failure
+RestartSec=10
+
+# Log to journal as well
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=python-wol
+
+[Install]
+WantedBy=multi-user.target
